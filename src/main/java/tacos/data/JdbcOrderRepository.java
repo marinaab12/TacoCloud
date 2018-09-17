@@ -45,10 +45,8 @@ public class JdbcOrderRepository implements OrderRepository {
     private Long saveOrderDetails(Order order) {
         @SuppressWarnings("unchecked")
         Map<String, Object> values = objectMapper.convertValue(order, Map.class);
-        System.out.println(values.entrySet());
         values.put("placedAt", order.getPlacedAt());
-        Long orderId = orderInserter.executeAndReturnKey(values).longValue();
-        return orderId;
+        return orderInserter.executeAndReturnKey(values).longValue();
     }
 
     private void saveTacoToOrder(Taco taco, Long orderId) {

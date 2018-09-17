@@ -15,8 +15,8 @@ import java.util.stream.Collectors;
 import tacos.Ingredient.Type;
 import tacos.Order;
 import tacos.Taco;
-import tacos.data.IngredientRepository;
-import tacos.data.TacoRepository;
+import tacos.data.JpaIngredientRepository;
+import tacos.data.JpaTacoRepository;
 
 import javax.validation.Valid;
 
@@ -26,11 +26,11 @@ import javax.validation.Valid;
 @SessionAttributes("order")
 public class DesignTacoController {
 
-    private final IngredientRepository ingredientRepository;
-    private final TacoRepository tacoRepository;
+    private final JpaIngredientRepository ingredientRepository;
+    private final JpaTacoRepository tacoRepository;
 
     @Autowired
-    public DesignTacoController(IngredientRepository ingredientRepository, TacoRepository tacoRepository) {
+    public DesignTacoController(JpaIngredientRepository ingredientRepository, JpaTacoRepository tacoRepository) {
         this.ingredientRepository = ingredientRepository;
         this.tacoRepository = tacoRepository;
     }
@@ -48,7 +48,7 @@ public class DesignTacoController {
     @GetMapping
     public String showDesignForm(Model model) {
         List<Ingredient> ingredients = new ArrayList<>();
-        ingredientRepository.findAll().forEach(i -> ingredients.add(i));
+        ingredientRepository.findAll().forEach(ingredients::add);
         Type[] types = Ingredient.Type.values();
         for (Type type : types) {
             model.addAttribute(type.toString().toLowerCase(), filterByType(ingredients, type));
@@ -57,10 +57,9 @@ public class DesignTacoController {
     }
 
     private List<Ingredient> filterByType(List<Ingredient> ingredients, Type type) {
-        List<Ingredient> result = ingredients.stream()
+        return ingredients.stream()
                 .filter(ingredient -> type.equals(ingredient.getType()))
                 .collect(Collectors.toList());
-        return result;
     }
 
     @PostMapping

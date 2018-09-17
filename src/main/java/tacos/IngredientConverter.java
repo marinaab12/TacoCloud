@@ -3,7 +3,7 @@ package tacos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
-import tacos.data.IngredientRepository;
+import tacos.data.JpaIngredientRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,10 +11,10 @@ import java.util.stream.Collectors;
 @Component
 public class IngredientConverter implements Converter<String, Ingredient> {
 
-    private final IngredientRepository ingredientRepository;
+    private final JpaIngredientRepository ingredientRepository;
 
     @Autowired
-    public IngredientConverter(IngredientRepository ingredientRepository) {
+    public IngredientConverter(JpaIngredientRepository ingredientRepository) {
         this.ingredientRepository = ingredientRepository;
     }
 
