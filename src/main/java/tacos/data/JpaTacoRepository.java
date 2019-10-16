@@ -6,4 +6,5 @@ import tacos.Taco;
 
 @Repository
 public interface JpaTacoRepository extends CrudRepository<Taco, Long> {
+
 }

@@ -6,4 +6,5 @@ import tacos.Order;
 
 @Repository
 public interface JpaOrderRepository extends CrudRepository<Order, Long> {
+
 }

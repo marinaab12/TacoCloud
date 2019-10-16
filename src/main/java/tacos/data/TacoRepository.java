@@ -4,6 +4,6 @@ import tacos.Taco;
 
 public interface TacoRepository {
 
-    Taco save(Taco design);
+    Taco save(Taco taco);
 
 }
