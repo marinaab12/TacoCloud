@@ -5,6 +5,6 @@ import tacos.User;
 
 public interface JpaUserRepository extends CrudRepository<User, Long> {
 
-    User finfByUsername(String username);
+    User findByUsername(String username);
 
 }

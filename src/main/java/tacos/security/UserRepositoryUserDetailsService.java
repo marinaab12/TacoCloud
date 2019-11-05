@@ -5,7 +5,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import tacos.User;
 import tacos.data.JpaUserRepository;
+
+import java.util.Objects;
 
 /**
  * Created by Marina Baban
@@ -23,6 +26,10 @@ public class UserRepositoryUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return null;
+        User user = userRepository.findByUsername(username);
+        if (Objects.nonNull(user)) {
+            return user;
+        }
+        throw new UsernameNotFoundException("User '" + username + "' not found");
     }
 }

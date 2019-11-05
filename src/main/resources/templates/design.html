@@ -7,21 +7,22 @@
 </head>
 
 <body>
+<!--<form method="POST" th:action="@{/logout}">  <input type="submit" value="Logout"/></form>-->
 <h1>Design your taco!</h1>
 <img th:src="@{/images/TacoCloud.png}"/>
 
-<form method="POST" th:object="${taco}">
+<form method="POST" th:action="@{/design}" th:object="${taco}">
     <div class="grid">
-        <!--<input type="hidden" th:field="*{id}">-->
-        <!--<input type="hidden" th:field="*{name}">-->
-        <!--<ul>-->
-            <!--<li th:each="ingredient: ${ingredients}">-->
-                <!--<div class="ui check-box">-->
-                    <!--<input type="checkbox" th:field="*{ingredients}" th:value="${ingredient.id}">-->
-                    <!--<label th:text="${ingredient.name}"></label>-->
-                <!--</div>-->
-            <!--</li>-->
-        <!--</ul>-->
+        <!--        <input type="hidden" th:field="*{id}">-->
+        <!--        <input type="hidden" th:field="*{name}">-->
+        <!--        <ul>-->
+        <!--            <li th:each="ingredient: ${ingredients}">-->
+        <!--                <div class="ui check-box">-->
+        <!--                    <input type="checkbox" th:field="*{ingredients}" th:value="${ingredient.id}">-->
+        <!--                    <label th:text="${ingredient.name}"></label>-->
+        <!--                </div>-->
+        <!--            </li>-->
+        <!--        </ul>-->
         <div class="ingredient-group" id="wraps">
         <h3>Designate your wrap:</h3>
             <div th:each="ingredient : ${wrap}">
