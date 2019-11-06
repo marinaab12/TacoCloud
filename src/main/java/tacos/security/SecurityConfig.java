@@ -37,15 +37,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/design", "/orders")
-                .hasRole("USER")
-                .antMatchers("/", "/**")
-                .access("permitAll")
+                    .hasRole("USER")
+                .antMatchers("/", "/**", "/h2-console/**")
+                    .access("permitAll")
                 .and()
                 .formLogin()
-                .loginPage("/login")
-                .defaultSuccessUrl("/design", true)
+                    .loginPage("/login")
+                    .defaultSuccessUrl("/design", true)
                 .and()
                 .logout()
-                .logoutSuccessUrl("/");
+                    .logoutSuccessUrl("/")
+                .and()
+                .csrf()
+                    .ignoringAntMatchers("/h2-console/**")
+                .and()
+                .headers()
+                    .frameOptions()
+                    .sameOrigin();
     }
 }

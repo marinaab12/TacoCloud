@@ -3,61 +3,63 @@
         xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Taco Cloud</title>
-    <link rel="stylesheet" th:href="@{/styles.css}" />
+    <link rel="stylesheet" th:href="@{/styles.css}"/>
 </head>
 
 <body>
-<!--<form method="POST" th:action="@{/logout}">  <input type="submit" value="Logout"/></form>-->
+<form method="POST" th:action="@{/logout}">
+    <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+    <input type="submit" value="Logout"/>
+</form>
+
 <h1>Design your taco!</h1>
+
 <img th:src="@{/images/TacoCloud.png}"/>
 
 <form method="POST" th:action="@{/design}" th:object="${taco}">
     <div class="grid">
-        <!--        <input type="hidden" th:field="*{id}">-->
-        <!--        <input type="hidden" th:field="*{name}">-->
-        <!--        <ul>-->
-        <!--            <li th:each="ingredient: ${ingredients}">-->
-        <!--                <div class="ui check-box">-->
-        <!--                    <input type="checkbox" th:field="*{ingredients}" th:value="${ingredient.id}">-->
-        <!--                    <label th:text="${ingredient.name}"></label>-->
-        <!--                </div>-->
-        <!--            </li>-->
-        <!--        </ul>-->
+        <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+
         <div class="ingredient-group" id="wraps">
-        <h3>Designate your wrap:</h3>
+            <h3>Designate your wrap:</h3>
             <div th:each="ingredient : ${wrap}">
-                <input name="ingredients" type="checkbox" th:value="${ingredient.id}" />
-                <span th:text="${ingredient.name}">INGREDIENT</span><br />
+                <input name="ingredients" type="checkbox" th:value="${ingredient.id}"/>
+                <span th:text="${ingredient.name}">INGREDIENT</span><br/>
             </div>
         </div>
+
         <div class="ingredient-group" id="proteins">
             <h3>Pick your protein:</h3>
             <div th:each="ingredient : ${protein}">
-                <input name="ingredients" type="checkbox" th:value="${ingredient.id}" />
-                <span th:text="${ingredient.name}">INGREDIENT</span><br />
+                <input name="ingredients" type="checkbox" th:value="${ingredient.id}"/>
+                <span th:text="${ingredient.name}">INGREDIENT</span><br/>
             </div>
         </div>
+
         <div class="ingredient-group" id="cheeses">
             <h3>Choose your cheese:</h3>
             <div th:each="ingredient : ${cheese}">
-                <input name="ingredients" type="checkbox" th:value="${ingredient.id}" />
-                <span th:text="${ingredient.name}">INGREDIENT</span><br />
+                <input name="ingredients" type="checkbox" th:value="${ingredient.id}"/>
+                <span th:text="${ingredient.name}">INGREDIENT</span><br/>
             </div>
         </div>
+
         <div class="ingredient-group" id="veggies">
             <h3>Determine your veggies:</h3>
             <div th:each="ingredient : ${veggies}">
-                <input name="ingredients" type="checkbox" th:value="${ingredient.id}" />
-                <span th:text="${ingredient.name}">INGREDIENT</span><br />
+                <input name="ingredients" type="checkbox" th:value="${ingredient.id}"/>
+                <span th:text="${ingredient.name}">INGREDIENT</span><br/>
             </div>
         </div>
+
         <div class="ingredient-group" id="sauces">
             <h3>Select your sauce:</h3>
             <div th:each="ingredient : ${sauce}">
-                <input name="ingredients" type="checkbox" th:value="${ingredient.id}" />
-                <span th:text="${ingredient.name}">INGREDIENT</span><br />
+                <input name="ingredients" type="checkbox" th:value="${ingredient.id}"/>
+                <span th:text="${ingredient.name}">INGREDIENT</span><br/>
             </div>
         </div>
+
     </div>
 
     <div>
@@ -65,6 +67,7 @@
         <input type="text" th:field="*{name}"/><br/>
         <button>Submit your taco</button>
     </div>
+
 </form>
 </body>
 </html>

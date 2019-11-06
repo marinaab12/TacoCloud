@@ -7,8 +7,15 @@
 </head>
 
 <body>
-<!--<form method="POST" th:action="@{/logout}">  <input type="submit" value="Logout"/></form>-->
+
+<form method="POST" th:action="@{/logout}">
+    <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+    <input type="submit" value="Logout"/>
+</form>
+
 <form method="POST" th:action="@{/orders}" th:object="${order}">
+    <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+
     <h1>Order your taco creations!</h1>
 
     <img th:src="@{/images/TacoCloud.png}"/>
@@ -21,6 +28,7 @@
     </div>
 
     <h3>Deliver my taco masterpieces to...</h3>
+
     <label for="name">Name: </label>
     <input type="text" th:field="*{name}"/>
     <span class="validationError"
@@ -57,6 +65,7 @@
     <br/>
 
     <h3>Here's how I'll pay...</h3>
+
     <label for="ccNumber">Credit Card #: </label>
     <input type="text" th:field="*{ccNumber}"/>
     <span class="validationError"
