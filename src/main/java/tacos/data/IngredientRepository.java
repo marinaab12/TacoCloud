@@ -1,6 +1,7 @@
 package tacos.data;
 
-import tacos.Ingredient;
+
+import tacos.model.Ingredient;
 
 public interface IngredientRepository {
     Iterable<Ingredient> findAll();

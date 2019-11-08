@@ -5,8 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
-import tacos.Ingredient;
-import tacos.Taco;
+import tacos.model.Ingredient;
+import tacos.model.Taco;
 
 import java.util.*;
 
