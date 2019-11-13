@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    username: tacouser
+    password: tacopassword
+
+
+logging:
+  level:
+    tacos: WARN

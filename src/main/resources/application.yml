@@ -1,0 +1,38 @@
+spring:
+  thymeleaf:
+    cache: false
+  h2:
+    console:
+      enabled: true
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        use_sql_comments: true
+        format_sql: true
+        type: trace
+        ddl-auto: create-drop
+  datasource:
+    username: sa
+    password:
+
+
+server:
+  port: 8443
+  ssl:
+    key-store: file:///Users/mbaban/Documents/TacoCloud/mykeys.jks
+    key-store-password: marina
+    key-password: marina
+
+
+logging:
+  path: /var/logs/
+  file: TacoCloud.log
+  level:
+    root: WARN
+    org.springframework.security: DEBUG
+
+
+taco:
+  orders:
+    pageSize: 10

@@ -6,15 +6,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
-import tacos.Ingredient;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import tacos.Ingredient.Type;
-import tacos.Order;
-import tacos.Taco;
+import tacos.model.Ingredient;
+import tacos.model.Ingredient.Type;
+import tacos.model.Order;
+import tacos.model.Taco;
 import tacos.data.JpaIngredientRepository;
 import tacos.data.JpaTacoRepository;
 
@@ -49,7 +49,7 @@ public class DesignTacoController {
     public String showDesignForm(Model model) {
         List<Ingredient> ingredients = new ArrayList<>();
         ingredientRepository.findAll().forEach(ingredients::add);
-        Type[] types = Ingredient.Type.values();
+        Type[] types = Type.values();
         for (Type type : types) {
             model.addAttribute(type.toString().toLowerCase(), filterByType(ingredients, type));
         }

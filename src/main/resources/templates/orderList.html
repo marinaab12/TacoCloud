@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Taco Cloud</title>
+    <link rel="stylesheet" th:href="@{/styles.css}"/>
+</head>
+
+<body>
+<form method="POST" th:action="@{/logout}">
+    <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+    <input type="submit" value="Logout"/>
+</form>
+
+<form method="GET" th:action="@{/orders}" th:object="${orders}">
+    <div class="grid">
+        <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+
+        <h3>Orders</h3>
+        <div class="order-group" th:each="order: ${orders}">
+
+            <p>Order</p>
+            Id: <span th:text="${order.id}"></span><br/>
+            Placed at: <span th:text="${order.placedAt}"></span><br/>
+            Name: <span th:text="${order.name}"></span><br/>
+            Street: <span th:text="${order.street}"></span><br/>
+            City: <span th:text="${order.city}"></span><br/>
+            State: <span th:text="${order.state}"></span><br/>
+            Zip: <span th:text="${order.zip}"></span><br/>
+            <div class="tacos-group" th:each="taco: ${order.tacos}">
+
+                <p>Taco</p>
+                Id: <span th:text="${taco.id}"></span><br/>
+                Created at: <span th:text="${taco.createdAt}"></span><br/>
+                Name: <span th:text="${taco.name}"></span><br/>
+                <div class="ingredients-group" th:each="ingredient: ${taco.ingredients}">
+
+                    <p>Ingredient</p>
+                    Id: <span th:text="${ingredient.id}"></span><br/>
+                    Name: <span th:text="${ingredient.name}"></span><br/>
+                    Type: <span th:text="${ingredient.type}"></span><br/>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</form>
+
+</body>
+</html>

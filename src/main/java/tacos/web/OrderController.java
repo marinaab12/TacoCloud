@@ -2,6 +2,8 @@ package tacos.web;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,11 +13,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
-import tacos.Order;
-import tacos.User;
+import tacos.model.Order;
+import tacos.model.User;
 import tacos.data.JpaOrderRepository;
 
 import javax.validation.Valid;
+
 
 @Slf4j
 @Controller
@@ -23,10 +26,13 @@ import javax.validation.Valid;
 @SessionAttributes("order")
 public class OrderController {
 
+    private OrderProps props;
+
     private JpaOrderRepository orderRepository;
 
     @Autowired
-    public OrderController(JpaOrderRepository orderRepository) {
+    public OrderController(OrderProps props, JpaOrderRepository orderRepository) {
+        this.props = props;
         this.orderRepository = orderRepository;
     }
 
@@ -49,5 +55,14 @@ public class OrderController {
 
         log.info("Order submitted: " + order);
         return "redirect:/";
+    }
+
+    @GetMapping
+    public String ordersForUser(@AuthenticationPrincipal User user, Model model) {
+        Pageable pageable = PageRequest.of(0, props.getPageSize());
+
+        model.addAttribute("orders", orderRepository.findByUserOrderByPlacedAtDesc(user, pageable));
+
+        return "orderList";
     }
 }
