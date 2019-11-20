@@ -17,12 +17,12 @@ spring:
     password:
 
 
-server:
-  port: 8443
-  ssl:
-    key-store: file:///Users/mbaban/Documents/TacoCloud/mykeys.jks
-    key-store-password: marina
-    key-password: marina
+#server:
+#  port: 8443
+#  ssl:
+#    key-store: file:///Users/mbaban/Documents/TacoCloud/mykeys.jks
+#    key-store-password: marina
+#    key-password: marina
 
 
 logging:
