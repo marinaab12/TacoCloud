@@ -15,6 +15,9 @@ spring:
   datasource:
     username: sa
     password:
+  data:
+    rest:
+      base-path: /api
 
 
 #server:
